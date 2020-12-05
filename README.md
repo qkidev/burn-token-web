@@ -1,5 +1,5 @@
-# h5_base 
-h5基础框架
+# burn-token-web
+燃烧
 
 ## Project setup
 ```
