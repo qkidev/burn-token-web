@@ -134,9 +134,9 @@ const initEth = {
         if (chainId != "0x133f0d5") {
           Toast('请使用qki主网')
         }
-        setTimeout(function () {
-          window.location.reload()
-        }, 2500)
+        // setTimeout(function () {
+        //   window.location.reload()
+        // }, 2500)
       });
 
       this.provider = customHttpProvider;

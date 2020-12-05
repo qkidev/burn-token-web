@@ -25,7 +25,7 @@
             <img src="../../assets/qwtx.png" class="img1" mode />
             <div class="text">全网通证</div>
           </div>
-          <div class="num">{{totalPower}}</div>
+          <div class="num">{{totalSupply}}</div>
         </div>
       </div>
       <div class="hy">
@@ -85,7 +85,7 @@
             placeholder="请输入邀请人地址"
             class="input_grey num flex1"
           />
-          <div class="text1" v-if="inviteAddress != ''">已绑定</div>
+          <div class="text1" v-if="inviteAddress != '' && inviteAddress != '0x0000000000000000000000000000000000000000' ">已绑定</div>
           <div class="flex-box" v-else @click="registration">确定绑定</div>
         </div>
       </div>
@@ -111,8 +111,8 @@
             <span class="lv">v5</span>
             <span class="tit">4%</span>
             <br />
+            <br>v1:算力0-499 v2:算力500-4999 v3:算力5000-9999 v4:算力10000-19999 v5:算力20000+ 
             <br />*例如转账100个，转出方扣除120个，接收方获得100个，20个销毁。
-            <br />刷新页面后，需要重新领取算力
           </div>
           <div class="flex-box btn" @click="lvShow = false">好的</div>
         </div>
@@ -214,8 +214,8 @@ export default {
       contract: null, // 当前的合约对象
       myAddress: "", // 我的地址
       balance: "0.00", // 我的余额
-      totalPower: "0",// 全网通证总量
-      // totalSupply: "0", // 全网通证总量
+      // totalPower: "0",// 全网通证总量
+      totalSupply: "0", // 全网通证总量
       power: "0", // 我的算力
       level: 1,
       lvShow: false,
@@ -236,8 +236,8 @@ export default {
       showBurnFlag: false, // 燃烧算力弹框
       receiveAble: false, // 收益是否可以被领取
       amount: '', // 燃烧数量
-      expectAmount: 0 // 预估收益
-      
+      expectAmount: 0, // 预估收益
+      decimals:2//精度
     };
   },
   async created() {
@@ -246,14 +246,16 @@ export default {
     let currAbi = process.env.NODE_ENV == 'development' ? abi : abiPro;
     var contract = new ethers.Contract(this.contractAddress, currAbi, this.signer);
     this.contract = contract;
-    await this.getBalance();
-    await this.getTotalPower();
-    await this.getRewardCount();
-    await this.getPower();
-    await this.getinviteCount();
+    await this.getDecimals();
     await this.getEpoch();
+    await this.getTotalSupply();
+    await this.getinviteCount();
     await this.getReceiveTime();
+    await this.getRewardCount();
     await this.getInviteAddress();
+    await this.getBalance();
+    await this.getPower();
+
     console.log(process.env.NODE_ENV);
   },
   mixins: [h5Copy, initEth, timeUtils, vertify],
@@ -289,17 +291,22 @@ export default {
     // 得到余额
     async getBalance() {
       let [error, balance] = await this.to(this.contract.balanceOf(this.myAddress));
-      this.doResponse(error, balance, "balance");
+      this.doResponse(error, balance, "balance",this.decimals);
     },
-    // 得到全网算力
-    async getTotalPower() {
-      let [error, res] = await this.to(this.contract.totalPower());
-      this.doResponse(error, res, "totalPower");
+    // 得到通证总量
+    async getTotalSupply() {
+      let [error, res] = await this.to(this.contract.totalSupply());
+      this.doResponse(error, res, "totalSupply",this.decimals);
+    },
+    // 得到精度
+    async getDecimals() {
+      let [error, res] = await this.to(this.contract.decimals());
+      this.doResponse(error, res, "decimals");
     },
     // 得到个人算力
     async getPower() {
       let [error, res] = await this.to(this.contract.power(this.myAddress));
-      this.doResponse(error, res, "power");
+      this.doResponse(error, res, "power",this.decimals);
     },
     // 获取累计收益
     async getRewardCount() {
@@ -328,6 +335,10 @@ export default {
     async getInviteAddress() {
       let [error, res] = await this.to(this.contract.invite(this.myAddress));
       if (this.doResponse(error, res)) {
+        if(res == "0x0000000000000000000000000000000000000000")
+        {
+          res = "";
+        }
         this.inviteAddress = res;
       }
     },
@@ -356,8 +367,10 @@ export default {
         Toast('请输入您的燃烧数量');
         return;
       }
+      let burn_amount = ethers.FixedNumber.from(this.amount.toString()) * 10 ** this.decimals;
+      console.log(burn_amount)
       let [error, res] = await this.to(
-        this.contract.burn(this.amount)
+        this.contract.burn(burn_amount)
       );
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
@@ -446,12 +459,12 @@ export default {
       }, 0);
     },
     // response公共处理方法
-    doResponse(error, res, keyName) {
-      console.log(keyName + "============", error, res);
+    doResponse(error, res, keyName,Decimal=0) {
       if (error == null) {
         if (keyName) {
           let hex = ethers.utils.hexValue(res);
-          this[keyName] = this.hex2int(hex);
+          let Value= this.hex2int(hex) /ethers.BigNumber.from(10).pow(Decimal)
+          this[keyName] = Value;
         }
         return true;
       } else {
@@ -769,7 +782,7 @@ export default {
 
     .box {
       width: 654px;
-      height: 623px;
+      height: 673px;
       background: #ffffff;
       border-radius: 20px;
       padding: 90px 78px 0 63px;
