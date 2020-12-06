@@ -255,8 +255,6 @@ export default {
     await this.getInviteAddress();
     await this.getBalance();
     await this.getPower();
-
-    console.log(process.env.NODE_ENV);
   },
   mixins: [h5Copy, initEth, timeUtils, vertify],
   methods: {
@@ -275,18 +273,24 @@ export default {
       if(distance <= 0){
         this.calcExpectAmount(distance)
       }
-      
-      
     },
     async getAddress() {
-      let address = await this.signer.getAddress();
-      this.myAddress = address;
+      let [error, address] = await this.to(this.signer.getAddress());
+      if(error == null){
+        this.myAddress = address;
+      } else {
+        console.log(error)
+      }
     },
     // 获取主网qki的余额
     async getQkiBalance() {
-      let balance = await this.provider.getBalance(this.address);
-      let etherString = ethers.utils.formatEther(balance);
-      return parseFloat(etherString);
+      let [error, balance] = await this.to(this.provider.getBalance(this.myAddress));
+      if(error == null) {
+        let etherString = ethers.utils.formatEther(balance);
+        return parseFloat(etherString);
+      }
+      return 0.0
+      
     },
     // 得到余额
     async getBalance() {
@@ -368,7 +372,6 @@ export default {
         return;
       }
       let burn_amount = ethers.FixedNumber.from(this.amount.toString()) * 10 ** this.decimals;
-      console.log(burn_amount)
       let [error, res] = await this.to(
         this.contract.burn(burn_amount)
       );
@@ -460,6 +463,7 @@ export default {
     },
     // response公共处理方法
     doResponse(error, res, keyName,Decimal=0) {
+      // console.log(keyName+'================', error, res);
       if (error == null) {
         if (keyName) {
           let hex = ethers.utils.hexValue(res);
@@ -514,6 +518,7 @@ export default {
       if(newTime != 0) {
         this.receiveTime = this.timestampToTime(this.receiveTimestamp);
       }
+     
       // 获取当前时间
       let nowTimeStr = Date.now()
           .toString()
@@ -521,6 +526,7 @@ export default {
       // 如果distance大于0表示收益还不可以领取。需要计算倒计时
       let distance = (this.receiveTimestamp + this.epoch) - Number(nowTimeStr);
       if(distance > 0 ){
+        
         this.countDown(distance, ()=>{
           this.calcExpectAmount(distance);
           this.receiveAble = true;
