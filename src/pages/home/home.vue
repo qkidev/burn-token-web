@@ -190,7 +190,7 @@
           </div>
           <div class="last-time" v-if="!receiveAble">上次领取奖励：{{receiveTime}}</div>
           <!-- <div class="tit tit1">* 产出收益最多保留5天</div> -->
-          <div class="tit tit1 tit2">* 产出收益最多累计5天</div>
+          <div class="tit tit1 tit2">* 等级达到Lv2,产出收益最多累计5天</div>
           <div class="flex-box btn" @click="getReceiveIncome">确定领取</div>
           <div class="text4" @click="incomeFlag = false">取消</div>
         </div>
