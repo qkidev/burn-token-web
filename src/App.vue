@@ -23,7 +23,7 @@ body {
   padding: 0;
   font-family: PingFangSC-Light, PingFang SC;
   // font-size: 20px;
-  background-color: #F6F5FC;
+  background-color: #ffffff;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -32,6 +32,6 @@ body {
   text-align: center;
   color: #2c3e50;
   min-height: 100%;
-  background-color: #F6F5FC;
+  background-color: #ffffff;
 }
 </style>
