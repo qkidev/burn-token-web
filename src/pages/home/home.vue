@@ -644,11 +644,13 @@ export default {
   }
 
   .hy {
-    width: 653px;
+    // margin-left: 50px;
+    // margin-right: 50px;
+    // width: 653px;
     height: 112px;
     background: linear-gradient(135deg, #ffc308 0%, #f6874f 100%);
     border-radius: 30px;
-    margin: 40px auto 0 auto;
+    margin: 40px 50px 0 50px;
     padding: 23px 45px 0 50px;
     position: relative;
     z-index: 9;
@@ -685,7 +687,6 @@ export default {
   position: relative;
   padding-top: 103px;
   padding-bottom: 100px;
-
   .tab {
     padding: 0 58px;
 
@@ -709,7 +710,7 @@ export default {
     text-align: center;
     font-size: 22px;
     color: #c0c0c0;
-    width: 608px;
+    // width: 608px;
     height: 2px;
     margin: 53px auto 0 auto;
     padding-top: 20px;
