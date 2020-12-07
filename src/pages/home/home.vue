@@ -5,11 +5,17 @@
         <img :src="require('../../assets/head.png')" class="huo" mode />
         <div class="right">
           <div class="align-center">
-            <div class="text ">我的算力</div>
-            <img :src="require('../../assets/lv'+level+'.png')" class="lv" mode />
+            <div class="text">我的算力</div>
+            <img
+              :src="require('../../assets/lv' + level + '.png')"
+              class="lv"
+              mode
+            />
           </div>
-          <div class="num alignLeft">{{power}}</div>
-           <div class="smallMainInserveTxt alignLeft">累计邀请收益 {{rewardCount}}</div>
+          <div class="num alignLeft">{{ power }}</div>
+          <div class="smallMainInserveTxt alignLeft">
+            累计邀请收益 {{ rewardCount }}
+          </div>
         </div>
       </div>
       <div class="money space-between">
@@ -18,21 +24,26 @@
             <img src="../../assets/wdye.png" class="img" mode />
             <div class="text">我的余额</div>
           </div>
-          <div class="num">{{balance}}</div>
+          <div class="num">{{ balance }}</div>
         </div>
         <div class="item">
           <div class="align-center">
             <img src="../../assets/qwtx.png" class="img1" mode />
             <div class="text">全网通证</div>
           </div>
-          <div class="num">{{totalSupply}}</div>
+          <div class="num">{{ totalSupply }}</div>
         </div>
       </div>
       <div class="hy">
         <div class="text alignLeft">燃烧挖矿合约</div>
         <div class="space-between">
-          <div class="num ellipsis">{{contractAddress}}</div>
-          <img src="../../assets/copy.png" class="copy" @click="h5Copy(contractAddress)" mode />
+          <div class="num ellipsis">{{ contractAddress }}</div>
+          <img
+            src="../../assets/copy.png"
+            class="copy"
+            @click="h5Copy(contractAddress)"
+            mode
+          />
         </div>
       </div>
     </div>
@@ -42,7 +53,7 @@
           <img src="../../assets/tab1.png" class="img" mode />
           <div class="text">燃烧原料</div>
         </div>
-        <div class="item"  @click="showIncome">
+        <div class="item" @click="showIncome">
           <img src="../../assets/tab2.png" class="img" mode />
           <div class="text">挖取矿产</div>
         </div>
@@ -55,18 +66,25 @@
           <div class="text">邀请好友</div>
         </div>
       </div>
-      <div class="line" v-if="receiveTimestamp != 0">上次领取奖励：{{receiveTime}}</div>
+      <div class="line" v-if="receiveTimestamp != 0">
+        上次领取奖励：{{ receiveTime }}
+      </div>
       <div class="my-box">
         <div class="top space-between">
           <div class="align-center">
             <img src="../../assets/add.png" class="img" mode />
             <div class="text">我的地址</div>
           </div>
-          <div class="text">共邀请 {{inviteCount}} 人</div>
+          <div class="text">共邀请 {{ inviteCount }} 人</div>
         </div>
         <div class="copy space-between">
-          <div class="num ellipsis">{{myAddress}}</div>
-          <img src="../../assets/copy1.png" class="copy-img" @click="h5Copy(myAddress)" mode />
+          <div class="num ellipsis">{{ myAddress }}</div>
+          <img
+            src="../../assets/copy1.png"
+            class="copy-img"
+            @click="h5Copy(myAddress)"
+            mode
+          />
         </div>
       </div>
       <div class="my-box">
@@ -77,7 +95,9 @@
           </div>
         </div>
         <div class="copy copy1 space-between">
-          <div class="num ellipsis" v-if="inviteAddress != ''">{{inviteAddress}}</div>
+          <div class="num ellipsis" v-if="inviteAddress != ''">
+            {{ inviteAddress }}
+          </div>
           <input
             type="text"
             v-model="inviteAddressInput"
@@ -85,7 +105,15 @@
             placeholder="请输入邀请人地址"
             class="input_grey num flex1"
           />
-          <div class="text1" v-if="inviteAddress != '' && inviteAddress != '0x0000000000000000000000000000000000000000' ">已绑定</div>
+          <div
+            class="text1"
+            v-if="
+              inviteAddress != '' &&
+              inviteAddress != '0x0000000000000000000000000000000000000000'
+            "
+          >
+            已绑定
+          </div>
           <div class="flex-box" v-else @click="registration">确定绑定</div>
         </div>
       </div>
@@ -111,7 +139,8 @@
             <span class="lv">v5</span>
             <span class="tit">4%</span>
             <br />
-            <br>v1:算力0-499 v2:算力500-4999 v3:算力5000-9999 v4:算力10000-19999 v5:算力20000+ 
+            <br />v1:算力0-499 v2:算力500-4999 v3:算力5000-9999
+            v4:算力10000-19999 v5:算力20000+
             <br />*例如转账100个，转出方扣除120个，接收方获得100个，20个销毁。
           </div>
           <div class="flex-box btn" @click="lvShow = false">好的</div>
@@ -128,7 +157,8 @@
           </div>
           <div class="text1 alignLeft">
             可用余额
-            <span class="smallMainTxt">{{balance}}</span>burn
+            <span class="smallMainTxt">{{ balance }}</span
+            >burn
           </div>
           <div class="input-box space-between">
             <input
@@ -144,7 +174,9 @@
               <div class="text3" @click="inputAll">全部</div>
             </div>
           </div>
-          <div class="tit  alignLeft">* 确定提交后你燃烧的余额将销毁变成3倍算力</div>
+          <div class="tit alignLeft">
+            * 确定提交后你燃烧的余额将销毁变成3倍算力
+          </div>
           <div class="flex-box btn" @click="burn">确定燃烧</div>
           <div class="text4" @click="showBurnFlag = false">取消</div>
         </div>
@@ -162,7 +194,7 @@
             <span>152152.311</span>
             <br />待更新通证算力
           </div>
-          <div class="tit tit1">我当前通证算力总量：{{power}}</div>
+          <div class="tit tit1">我当前通证算力总量：{{ power }}</div>
           <div class="flex-box btn">增加更新</div>
           <div class="text4" @click="bgShow = false">取消</div>
         </div>
@@ -177,21 +209,42 @@
             <div class="text">领取收益</div>
           </div>
           <div class="text5" v-if="receiveAble">
-            <span class="hugeMainTxt">{{expectAmount}}</span>
+            <span class="hugeMainTxt">{{ expectAmount }}</span>
             <br />burn
           </div>
           <div class="time-box" v-else>
-            <div class="time" v-for="(item, index) in hour" :key="'1_'+index">{{item}}</div>
+            <div class="time" v-for="(item, index) in hour" :key="'1_' + index">
+              {{ item }}
+            </div>
 
             <div class="bi">:</div>
-            <div class="time" v-for="(item, index) in minutes" :key="'2_'+index">{{item}}</div>
+            <div
+              class="time"
+              v-for="(item, index) in minutes"
+              :key="'2_' + index"
+            >
+              {{ item }}
+            </div>
             <div class="bi">:</div>
-            <div class="time" v-for="(item, index) in seconds" :key="'3_'+index">{{item}}</div>
+            <div
+              class="time"
+              v-for="(item, index) in seconds"
+              :key="'3_' + index"
+            >
+              {{ item }}
+            </div>
           </div>
-          <div class="last-time" v-if="!receiveAble">上次领取奖励：{{receiveTime}}</div>
+          <div class="last-time" v-if="!receiveAble">
+            上次领取奖励：{{ receiveTime }}
+          </div>
           <!-- <div class="tit tit1">* 产出收益最多保留5天</div> -->
           <div class="tit tit1 tit2">* 等级达到Lv2,产出收益最多累计5天</div>
-          <div :class="['flex-box',receiveAble ? 'btn': 'btn-disable']" @click="getReceiveIncome">{{receiveAble ? '确定领取': '明日再来'}}</div>
+          <div
+            :class="['flex-box', receiveAble ? 'btn' : 'btn-disable']"
+            @click="getReceiveIncome"
+          >
+            {{ receiveAble ? "确定领取" : "明日再来" }}
+          </div>
           <div class="text4" @click="incomeFlag = false">取消</div>
         </div>
       </div>
@@ -206,7 +259,7 @@ import { ethers } from "ethers";
 import { abi, abiPro } from "./abi";
 import { Toast } from "vant";
 // 收益率,为了防止机器刷，LV1级qki余额大于1时，才能够拿到0.2%，否则拿到0.1%
-const	RATE = ['0.002', '0.005', '0.006', '0.007','0.008'];
+const RATE = ["0.002", "0.005", "0.006", "0.007", "0.008"];
 export default {
   data() {
     return {
@@ -224,27 +277,34 @@ export default {
       epoch: 86400, // 挖矿周期
       inviteCount: "0", // 邀请的人数
       receiveTimestamp: 0, // 上次领取奖励的时间戳
-      receiveTime: '', // 上次领取奖励的时间
+      receiveTime: "", // 上次领取奖励的时间
       inviteAddress: "", // 已绑定邀请人地址
       inviteAddressInput: "", // 输入邀请人的地址
       rewardCount: 0, // 获取累计收益
       incomeFlag: false, // 领取收益弹框
-      deadline: '', // 截止日期
-      hour: '00', // 时
-      minutes: '00', // 分
-      seconds: '00', // 秒
+      deadline: "", // 截止日期
+      hour: "00", // 时
+      minutes: "00", // 分
+      seconds: "00", // 秒
       showBurnFlag: false, // 燃烧算力弹框
       receiveAble: false, // 收益是否可以被领取
-      amount: '', // 燃烧数量
+      amount: "", // 燃烧数量
       expectAmount: 0, // 预估收益
-      decimals:2//精度
+      decimals: 2, //精度
     };
   },
   async created() {
-    this.contractAddress = process.env.NODE_ENV == 'development' ? "0xD3e9448D573963344f8cF6E95E6b072dc5b701C3" : '0x3FB708e854041673433e708feDb9a1b43905b6f7';
+    this.contractAddress =
+      process.env.NODE_ENV == "development"
+        ? "0xD3e9448D573963344f8cF6E95E6b072dc5b701C3"
+        : "0x3FB708e854041673433e708feDb9a1b43905b6f7";
     await this.getAddress();
-    let currAbi = process.env.NODE_ENV == 'development' ? abi : abiPro;
-    var contract = new ethers.Contract(this.contractAddress, currAbi, this.signer);
+    let currAbi = process.env.NODE_ENV == "development" ? abi : abiPro;
+    var contract = new ethers.Contract(
+      this.contractAddress,
+      currAbi,
+      this.signer
+    );
     this.contract = contract;
     await this.getDecimals();
     await this.getEpoch();
@@ -264,43 +324,56 @@ export default {
     },
     // 展示领取收益
     async showIncome() {
-      this.incomeFlag = true;
-      let nowTimeStr = Date.now()
-          .toString()
-          .substring(0, 10);
-      // 如果distance大于0表示收益还不可以领取。需要计算倒计时
-      let distance = (this.receiveTimestamp + this.epoch) - Number(nowTimeStr);
-      if(distance <= 0){
-        this.calcExpectAmount(distance)
+      // 新用户且算力不为0，进入页面就可以领取一次收益
+      if(this.receiveTimestamp == 0){
+        if(this.power != 0) {
+          this.receiveAble = true;
+          this.incomeFlag = true;
+        } else{
+          Toast('您当前还没有算力！');
+          return;
+        }
+      } else {
+        this.incomeFlag = true;
+        let nowTimeStr = Date.now().toString().substring(0, 10);
+        let distance = this.receiveTimestamp + this.epoch - Number(nowTimeStr);
+        // 如果distance大于0表示收益还不可以领取。需要计算倒计时
+        if (distance <= 0) {
+          this.calcExpectAmount(distance);
+        }
       }
+      
     },
     async getAddress() {
       let [error, address] = await this.to(this.signer.getAddress());
-      if(error == null){
+      if (error == null) {
         this.myAddress = address;
       } else {
-        console.log(error)
+        console.log(error);
       }
     },
     // 获取主网qki的余额
     async getQkiBalance() {
-      let [error, balance] = await this.to(this.provider.getBalance(this.myAddress));
-      if(error == null) {
+      let [error, balance] = await this.to(
+        this.provider.getBalance(this.myAddress)
+      );
+      if (error == null) {
         let etherString = ethers.utils.formatEther(balance);
         return parseFloat(etherString);
       }
-      return 0.0
-      
+      return 0.0;
     },
     // 得到余额
     async getBalance() {
-      let [error, balance] = await this.to(this.contract.balanceOf(this.myAddress));
-      this.doResponse(error, balance, "balance",this.decimals);
+      let [error, balance] = await this.to(
+        this.contract.balanceOf(this.myAddress)
+      );
+      this.doResponse(error, balance, "balance", this.decimals);
     },
     // 得到通证总量
     async getTotalSupply() {
       let [error, res] = await this.to(this.contract.totalSupply());
-      this.doResponse(error, res, "totalSupply",this.decimals);
+      this.doResponse(error, res, "totalSupply", this.decimals);
     },
     // 得到精度
     async getDecimals() {
@@ -310,37 +383,40 @@ export default {
     // 得到个人算力
     async getPower() {
       let [error, res] = await this.to(this.contract.power(this.myAddress));
-      this.doResponse(error, res, "power",this.decimals);
+      this.doResponse(error, res, "power", this.decimals);
     },
     // 获取累计收益
     async getRewardCount() {
       let [error, res] = await this.to(
         this.contract.rewardCount(this.myAddress)
       );
-      this.doResponse(error, res, "rewardCount",this.decimals);
+      this.doResponse(error, res, "rewardCount", this.decimals);
     },
     // 获取上次领取奖励的时间
     // 注：这个方法必须调用在getEpoch方法之后，因为他们两个共同影响倒计时的逻辑
     async getReceiveTime() {
-      let [error, res] = await this.to(this.contract.last_miner(this.myAddress));
+      let [error, res] = await this.to(
+        this.contract.last_miner(this.myAddress)
+      );
       this.doResponse(error, res, "receiveTimestamp");
     },
     // 获取挖矿周期
     async getEpoch() {
       let [error, res] = await this.to(this.contract.epoch());
-      this.doResponse(error, res, 'epoch')
+      this.doResponse(error, res, "epoch");
     },
     // 获取邀请人数
     async getinviteCount() {
-      let [error, res] = await this.to(this.contract.inviteCount(this.myAddress));
+      let [error, res] = await this.to(
+        this.contract.inviteCount(this.myAddress)
+      );
       this.doResponse(error, res, "inviteCount");
     },
     // 获取绑定人信息
     async getInviteAddress() {
       let [error, res] = await this.to(this.contract.invite(this.myAddress));
       if (this.doResponse(error, res)) {
-        if(res == "0x0000000000000000000000000000000000000000")
-        {
+        if (res == "0x0000000000000000000000000000000000000000") {
           res = "";
         }
         this.inviteAddress = res;
@@ -367,26 +443,24 @@ export default {
     },
     // 燃烧
     async burn() {
-      if(this.amount == '') {
-        Toast('请输入您的燃烧数量');
+      if (this.amount == "") {
+        Toast("请输入您的燃烧数量");
         return;
       }
-      let burn_amount = ethers.FixedNumber.from(this.amount.toString()) * 10 ** this.decimals;
-      let [error, res] = await this.to(
-        this.contract.burn(burn_amount)
-      );
+      let burn_amount =
+        ethers.FixedNumber.from(this.amount.toString()) * 10 ** this.decimals;
+      let [error, res] = await this.to(this.contract.burn(burn_amount));
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
         Toast("操作成功");
         await this.queryTransation(res.hash);
-        
       }
     },
     // 领取挖矿收益
     async getReceiveIncome() {
-      if(!this.receiveAble){
+      if (!this.receiveAble) {
         Toast("您今天已经领取过收益了,明天再来！");
-        return 
+        return;
       }
       let [error, res] = await this.to(this.contract.mint());
       if (this.doResponse(error, res, "")) {
@@ -397,53 +471,53 @@ export default {
     },
     // 查询Transaction
     async queryTransation(hash, updateTime) {
-      await this.provider.waitForTransaction(hash).then(async receipt => {
+      await this.provider.waitForTransaction(hash).then(async (receipt) => {
         Toast("区块打包成功", receipt);
         await this.getBalance();
         await this.getPower();
         await this.getTotalPower();
-        if(updateTime) {
+        if (updateTime) {
           await this.getRewardCount();
           await this.getEpoch();
           await this.getReceiveTime();
         }
       });
     },
-    async calcExpectAmount(distance){
+    async calcExpectAmount(distance) {
       // 计算阶段奖励
-      let currRate = '0.001';
-      if(this.level == 1){
-       let balance =  await this.getQkiBalance();
-        if(balance < 1) {
-          currRate = '10'
+      let currRate = "0.001";
+      if (this.level == 1) {
+        let balance = await this.getQkiBalance();
+        if (balance < 1) {
+          currRate = "0.001";
         } else {
-          currRate = RATE[this.level -1];
+          currRate = RATE[this.level - 1];
         }
       } else {
-        currRate = RATE[this.level -1];
+        currRate = RATE[this.level - 1];
       }
       // 奖励是否过期
       let day = Math.floor(Math.abs(distance) / this.epoch);
       day = day + 1;
       // let expectAmount = this.accMul(this.power, currRate);
-    if(this.timestampToTime == 0){
-      day = 1;
-    } else{
-      if(this.level == 1 ){
-        if(day > 1){
-          day = 1;
-        }
+      if (this.timestampToTime == 0) {
+        day = 1;
       } else {
-        if(day > 5){
-           day = 5;
+        if (this.level == 1) {
+          if (day > 1) {
+            day = 1;
+          }
+        } else {
+          if (day > 5) {
+            day = 5;
+          }
         }
       }
-    }
-      
-      // let par1 = 
+
+      // let par1 =
       this.expectAmount = this.accMul(this.accMul(this.power, currRate), day);
     },
-     // 十六进制转10进制
+    // 十六进制转10进制
     hex2int(hex) {
       if (hex.indexOf("0x") >= 0) {
         hex = hex.substring("2");
@@ -460,18 +534,19 @@ export default {
         }
         a[i] = code;
       }
-      return a.reduce(function(acc, c) {
+      return a.reduce(function (acc, c) {
         acc = 16 * acc + c;
         return acc;
       }, 0);
     },
     // response公共处理方法
-    doResponse(error, res, keyName,Decimal=0) {
+    doResponse(error, res, keyName, Decimal = 0) {
       // console.log(keyName+'================', error, res);
       if (error == null) {
         if (keyName) {
           let hex = ethers.utils.hexValue(res);
-          let Value= this.hex2int(hex) /ethers.BigNumber.from(10).pow(Decimal)
+          let Value =
+            this.hex2int(hex) / ethers.BigNumber.from(10).pow(Decimal);
           this[keyName] = Value;
         }
         return true;
@@ -490,7 +565,7 @@ export default {
     inputAll() {
       this.amount = this.balance;
     },
-    
+
     tab(num) {
       this.active = num;
     },
@@ -518,20 +593,16 @@ export default {
         this.level = 5;
       }
     },
-    receiveTimestamp(newTime){
-      if(newTime != 0) {
+    receiveTimestamp(newTime) {
+      if (newTime != 0) {
         this.receiveTime = this.timestampToTime(this.receiveTimestamp);
-      }
-     
+      } 
       // 获取当前时间
-      let nowTimeStr = Date.now()
-          .toString()
-          .substring(0, 10);
+      let nowTimeStr = Date.now().toString().substring(0, 10);
       // 如果distance大于0表示收益还不可以领取。需要计算倒计时
-      let distance = (this.receiveTimestamp + this.epoch) - Number(nowTimeStr);
-      if(distance > 0 ){
-        
-        this.countDown(distance, ()=>{
+      let distance = this.receiveTimestamp + this.epoch - Number(nowTimeStr);
+      if (distance > 0) {
+        this.countDown(distance, () => {
           this.calcExpectAmount(distance);
           this.receiveAble = true;
         });
@@ -540,8 +611,8 @@ export default {
         this.calcExpectAmount(distance);
         this.receiveAble = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -595,7 +666,6 @@ export default {
       }
 
       .align-center {
-
         .lv {
           width: 44px;
           height: 28px;
@@ -840,7 +910,6 @@ export default {
         color: #fff;
         margin-top: 50px;
       }
-      
     }
 
     .box1 {
@@ -917,7 +986,7 @@ export default {
         color: #fff;
         margin-top: 28px;
       }
-      .btn-disable{
+      .btn-disable {
         width: 100%;
         height: 120px;
         background: #ccc;
@@ -975,18 +1044,18 @@ export default {
   }
 }
 .input-box {
-          width: 100%;
-          height: 120px;
-          background: #F3F3F3;
-          border-radius: 20px;
-          margin-top: 34px;
-          padding: 0 37px;
-          box-sizing: border-box;
-          .input {
-            width: 70%;
-            height: 100%;
-            border: none;
-            background-color: transparent;
-          }
-        }
+  width: 100%;
+  height: 120px;
+  background: #f3f3f3;
+  border-radius: 20px;
+  margin-top: 34px;
+  padding: 0 37px;
+  box-sizing: border-box;
+  .input {
+    width: 70%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+  }
+}
 </style>
