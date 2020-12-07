@@ -191,7 +191,7 @@
           <div class="last-time" v-if="!receiveAble">上次领取奖励：{{receiveTime}}</div>
           <!-- <div class="tit tit1">* 产出收益最多保留5天</div> -->
           <div class="tit tit1 tit2">* 等级达到Lv2,产出收益最多累计5天</div>
-          <div class="flex-box btn" @click="getReceiveIncome">确定领取</div>
+          <div :class="['flex-box',receiveAble ? 'btn': 'btn-disable']" @click="getReceiveIncome">{{receiveAble ? '确定领取': '明日再来'}}</div>
           <div class="text4" @click="incomeFlag = false">取消</div>
         </div>
       </div>
@@ -384,6 +384,10 @@ export default {
     },
     // 领取挖矿收益
     async getReceiveIncome() {
+      if(!this.receiveAble){
+        Toast("您今天已经领取过收益了,明天再来！");
+        return 
+      }
       let [error, res] = await this.to(this.contract.mint());
       if (this.doResponse(error, res, "")) {
         this.incomeFlag = false;
@@ -566,10 +570,10 @@ export default {
 }
 .head {
   width: 100%;
-  height: 575px;
+  height: 500px;
   background: url(../../assets/bj.png) no-repeat;
   background-size: 100% 100%;
-  padding-top: 188px;
+  padding-top: 100px;
   position: relative;
   box-sizing: border-box;
   .my {
@@ -640,11 +644,13 @@ export default {
   }
 
   .hy {
-    width: 653px;
+    // margin-left: 50px;
+    // margin-right: 50px;
+    // width: 653px;
     height: 112px;
     background: linear-gradient(135deg, #ffc308 0%, #f6874f 100%);
     border-radius: 30px;
-    margin: 40px auto 0 auto;
+    margin: 40px 50px 0 50px;
     padding: 23px 45px 0 50px;
     position: relative;
     z-index: 9;
@@ -681,7 +687,6 @@ export default {
   position: relative;
   padding-top: 103px;
   padding-bottom: 100px;
-
   .tab {
     padding: 0 58px;
 
@@ -705,7 +710,7 @@ export default {
     text-align: center;
     font-size: 22px;
     color: #c0c0c0;
-    width: 608px;
+    // width: 608px;
     height: 2px;
     margin: 53px auto 0 auto;
     padding-top: 20px;
@@ -835,14 +840,18 @@ export default {
         color: #fff;
         margin-top: 50px;
       }
+      
     }
 
     .box1 {
-      width: 654px;
-      height: 699px;
+      margin-left: 50px;
+      margin-right: 50px;
+
+      width: 100%;
+      // height: 699px;
       background: #ffffff;
       border-radius: 20px;
-      padding: 71px 56px 0 56px;
+      padding: 71px 56px 71px 56px;
       .rs {
         width: 30px;
         height: 45px;
@@ -907,6 +916,15 @@ export default {
         font-size: 32px;
         color: #fff;
         margin-top: 28px;
+      }
+      .btn-disable{
+        width: 100%;
+        height: 120px;
+        background: #ccc;
+        border-radius: 20px;
+        font-size: 32px;
+        color: #fff;
+        margin-top: 50px;
       }
       .text4 {
         text-align: center;
