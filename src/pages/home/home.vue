@@ -9,7 +9,7 @@
             <img :src="require('../../assets/lv'+level+'.png')" class="lv" mode />
           </div>
           <div class="num alignLeft">{{power}}</div>
-           <div class="smallMainInserveTxt alignLeft">我的累计收益 {{rewardCount}}</div>
+           <div class="smallMainInserveTxt alignLeft">累计邀请收益 {{rewardCount}}</div>
         </div>
       </div>
       <div class="money space-between">
@@ -317,7 +317,7 @@ export default {
       let [error, res] = await this.to(
         this.contract.rewardCount(this.myAddress)
       );
-      this.doResponse(error, res, "rewardCount");
+      this.doResponse(error, res, "rewardCount",this.decimals);
     },
     // 获取上次领取奖励的时间
     // 注：这个方法必须调用在getEpoch方法之后，因为他们两个共同影响倒计时的逻辑
