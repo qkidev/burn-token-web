@@ -6,16 +6,10 @@
         <div class="right">
           <div class="align-center">
             <div class="text">我的算力</div>
-            <img
-              :src="require('../../assets/lv' + level + '.png')"
-              class="lv"
-              mode
-            />
+            <img :src="require('../../assets/lv' + level + '.png')" class="lv" mode />
           </div>
           <div class="num alignLeft">{{ power }}</div>
-          <div class="smallMainInserveTxt alignLeft">
-            累计邀请收益 {{ rewardCount }}
-          </div>
+          <div class="smallMainInserveTxt alignLeft">累计邀请收益 {{ rewardCount }}</div>
         </div>
       </div>
       <div class="money space-between">
@@ -38,12 +32,7 @@
         <div class="text alignLeft">燃烧挖矿合约</div>
         <div class="space-between">
           <div class="num ellipsis">{{ contractAddress }}</div>
-          <img
-            src="../../assets/copy.png"
-            class="copy"
-            @click="h5Copy(contractAddress)"
-            mode
-          />
+          <img src="../../assets/copy.png" class="copy" @click="h5Copy(contractAddress)" mode />
         </div>
       </div>
     </div>
@@ -66,9 +55,7 @@
           <div class="text">邀请好友</div>
         </div>
       </div>
-      <div class="line" v-if="receiveTimestamp != 0">
-        上次领取奖励：{{ receiveTime }}
-      </div>
+      <div class="line" v-if="receiveTimestamp != 0">上次领取奖励：{{ receiveTime }}</div>
       <div class="my-box">
         <div class="top space-between">
           <div class="align-center">
@@ -79,12 +66,7 @@
         </div>
         <div class="copy space-between">
           <div class="num ellipsis">{{ myAddress }}</div>
-          <img
-            src="../../assets/copy1.png"
-            class="copy-img"
-            @click="h5Copy(myAddress)"
-            mode
-          />
+          <img src="../../assets/copy1.png" class="copy-img" @click="h5Copy(myAddress)" mode />
         </div>
       </div>
       <div class="my-box">
@@ -95,9 +77,7 @@
           </div>
         </div>
         <div class="copy copy1 space-between">
-          <div class="num ellipsis" v-if="inviteAddress != ''">
-            {{ inviteAddress }}
-          </div>
+          <div class="num ellipsis" v-if="inviteAddress != ''">{{ inviteAddress }}</div>
           <input
             type="text"
             v-model="inviteAddressInput"
@@ -111,9 +91,7 @@
               inviteAddress != '' &&
               inviteAddress != '0x0000000000000000000000000000000000000000'
             "
-          >
-            已绑定
-          </div>
+          >已绑定</div>
           <div class="flex-box" v-else @click="registration">确定绑定</div>
         </div>
       </div>
@@ -157,26 +135,17 @@
           </div>
           <div class="text1 alignLeft">
             可用余额
-            <span class="smallMainTxt">{{ balance }}</span
-            >burn
+            <span class="smallMainTxt">{{ balance }}</span>burn
           </div>
           <div class="input-box space-between">
-            <input
-              type="text"
-              class="input"
-              value
-              placeholder="输入燃烧数量"
-              v-model="amount"
-            />
+            <input type="text" class="input" value placeholder="输入燃烧数量" v-model="amount" />
             <div class="align-center">
               <div class="text2">burn</div>
               <div class="line"></div>
               <div class="text3" @click="inputAll">全部</div>
             </div>
           </div>
-          <div class="tit alignLeft">
-            * 确定提交后你燃烧的余额将销毁变成3倍算力
-          </div>
+          <div class="tit alignLeft">* 确定提交后你燃烧的余额将销毁变成3倍算力</div>
           <div class="flex-box btn" @click="burn">确定燃烧</div>
           <div class="text4" @click="showBurnFlag = false">取消</div>
         </div>
@@ -213,38 +182,20 @@
             <br />burn
           </div>
           <div class="time-box" v-else>
-            <div class="time" v-for="(item, index) in hour" :key="'1_' + index">
-              {{ item }}
-            </div>
+            <div class="time" v-for="(item, index) in hour" :key="'1_' + index">{{ item }}</div>
 
             <div class="bi">:</div>
-            <div
-              class="time"
-              v-for="(item, index) in minutes"
-              :key="'2_' + index"
-            >
-              {{ item }}
-            </div>
+            <div class="time" v-for="(item, index) in minutes" :key="'2_' + index">{{ item }}</div>
             <div class="bi">:</div>
-            <div
-              class="time"
-              v-for="(item, index) in seconds"
-              :key="'3_' + index"
-            >
-              {{ item }}
-            </div>
+            <div class="time" v-for="(item, index) in seconds" :key="'3_' + index">{{ item }}</div>
           </div>
-          <div class="last-time" v-if="!receiveAble">
-            上次领取奖励：{{ receiveTime }}
-          </div>
+          <div class="last-time" v-if="!receiveAble">上次领取奖励：{{ receiveTime }}</div>
           <!-- <div class="tit tit1">* 产出收益最多保留5天</div> -->
           <div class="tit tit1 tit2">* 等级达到Lv2,产出收益最多累计5天</div>
           <div
             :class="['flex-box', receiveAble ? 'btn' : 'btn-disable']"
             @click="getReceiveIncome"
-          >
-            {{ receiveAble ? "确定领取" : "明日再来" }}
-          </div>
+          >{{ receiveAble ? "确定领取" : "明日再来" }}</div>
           <div class="text4" @click="incomeFlag = false">取消</div>
         </div>
       </div>
@@ -290,7 +241,7 @@ export default {
       receiveAble: false, // 收益是否可以被领取
       amount: "", // 燃烧数量
       expectAmount: 0, // 预估收益
-      decimals: 2, //精度
+      decimals: 2 //精度
     };
   },
   async created() {
@@ -325,24 +276,27 @@ export default {
     // 展示领取收益
     async showIncome() {
       // 新用户且算力不为0，进入页面就可以领取一次收益
-      if(this.receiveTimestamp == 0){
-        if(this.power != 0) {
+      if (this.receiveTimestamp == 0) {
+        if (this.power != 0) {
           this.receiveAble = true;
           this.incomeFlag = true;
-        } else{
-          Toast('您当前还没有算力！');
+          // 默认领取一天的收益，传入参数只要是小于epoch的任何一个数都可以
+          this.calcExpectAmount(10);
+        } else {
+          Toast("您当前还没有算力！");
           return;
         }
       } else {
         this.incomeFlag = true;
-        let nowTimeStr = Date.now().toString().substring(0, 10);
+        let nowTimeStr = Date.now()
+          .toString()
+          .substring(0, 10);
         let distance = this.receiveTimestamp + this.epoch - Number(nowTimeStr);
         // 如果distance大于0表示收益还不可以领取。需要计算倒计时
         if (distance <= 0) {
           this.calcExpectAmount(distance);
         }
       }
-      
     },
     async getAddress() {
       let [error, address] = await this.to(this.signer.getAddress());
@@ -471,7 +425,7 @@ export default {
     },
     // 查询Transaction
     async queryTransation(hash, updateTime) {
-      await this.provider.waitForTransaction(hash).then(async (receipt) => {
+      await this.provider.waitForTransaction(hash).then(async receipt => {
         Toast("区块打包成功", receipt);
         await this.getBalance();
         await this.getPower();
@@ -534,7 +488,7 @@ export default {
         }
         a[i] = code;
       }
-      return a.reduce(function (acc, c) {
+      return a.reduce(function(acc, c) {
         acc = 16 * acc + c;
         return acc;
       }, 0);
@@ -568,7 +522,7 @@ export default {
 
     tab(num) {
       this.active = num;
-    },
+    }
   },
   // computed: {
   //   receiveAble: function(){
@@ -596,9 +550,11 @@ export default {
     receiveTimestamp(newTime) {
       if (newTime != 0) {
         this.receiveTime = this.timestampToTime(this.receiveTimestamp);
-      } 
+      }
       // 获取当前时间
-      let nowTimeStr = Date.now().toString().substring(0, 10);
+      let nowTimeStr = Date.now()
+        .toString()
+        .substring(0, 10);
       // 如果distance大于0表示收益还不可以领取。需要计算倒计时
       let distance = this.receiveTimestamp + this.epoch - Number(nowTimeStr);
       if (distance > 0) {
@@ -611,8 +567,8 @@ export default {
         this.calcExpectAmount(distance);
         this.receiveAble = true;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
