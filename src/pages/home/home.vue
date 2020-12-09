@@ -382,10 +382,17 @@ export default {
         Toast("请输入绑定邀请的地址");
         return;
       }
-      if (this.inviteAddressInput == this.myAddress) {
-        Toast("不能绑定自己！");
+      if(this.inviteAddressInput.toLowerCase() == this.myAddress.toLowerCase()){
+         Toast("不能绑定自己！");
+          this.inviteAddressInput = '';
         return;
       }
+      if (this.inviteAddressInput.toLowerCase() == this.contractAddress.toLowerCase()) {
+        Toast("不能绑定合约地址为邀请人！");
+        this.inviteAddressInput = '';
+        return;
+      }
+
       // TODO: 如何验证地址的合法性？？
       let [error, res] = await this.to(
         this.contract.registration(this.inviteAddressInput)
