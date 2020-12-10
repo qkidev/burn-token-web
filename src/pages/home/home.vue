@@ -436,7 +436,7 @@ export default {
         Toast("区块打包成功", receipt);
         await this.getBalance();
         await this.getPower();
-        await this.getTotalPower();
+        await this.getTotalSupply();
         if (updateTime) {
           await this.getRewardCount();
           await this.getEpoch();
