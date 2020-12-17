@@ -96,6 +96,9 @@
         </div>
       </div>
     </div>
+    <div class="tips left">
+      <p> 推荐使用qkswap交换bt和其它通证，避免被骗。qkswap可以点击进入<a class="link" href="https://app.qkswap.io/">https://app.qkswap.io/</a> </p>
+    </div>
     <div class="bg" v-show="lvShow">
       <div class="flex-box">
         <div class="box">
@@ -587,6 +590,19 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.left{
+  text-align: left;
+
+}
+.tips{
+  padding: 0 58px;
+  font-size: 24px;
+  // letter-spacing:2px;
+  color: #737278;
+  .link{
+    color: #dc5243;
+  }
 }
 .align-center {
   display: flex;
