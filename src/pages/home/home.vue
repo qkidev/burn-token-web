@@ -95,6 +95,24 @@
           <div class="flex-box" v-else @click="registration">确定绑定</div>
         </div>
       </div>
+
+      <div class="my-box qkswap">
+        <div class="text"> <img src="../../assets/qks.png" alt=""> 推荐使用qkswap交换bt和其它通证，避免被骗。  qkswap可以点击进入 <a href="https://app.qkswap.io" class="link"><b>https://app.qkswap.io</b></a></div>
+      </div>
+
+      <div class="my-box">
+        <div class="text"><b>Burn Token</b> 的智能合约已通过<b>知道创宇审核</b></div>
+        <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmXbSeRoC5QoJgNCvyz4igZZyy1shYgcTmBqSnJCRUafSt">点击查看审核安全报告</a></div>
+        <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmeZgnaFybXxFp9SorHTNkoMFZ5zHSmb7BTSSss5Cftmab">Click to view the audit security report</a></div>
+      </div>
+
+      <div class="zdcy">
+        <div class="item"><img width="30px" src="../../assets/zdcy.png" mode /></div>
+        <div class="item">
+            <div>知道创宇云安全认证</div>
+            <div>WWW.YUNAQ.COM</div>
+        </div>
+      </div>
     </div>
     <div class="bg" v-show="lvShow">
       <div class="flex-box">
@@ -1019,6 +1037,41 @@ export default {
     height: 100%;
     border: none;
     background-color: transparent;
+  }
+}
+
+.link {
+    color: #b09b99;
+    text-decoration-line: underline;
+}
+
+.qkswap {
+  img {
+    width: 35px;
+    vertical-align: middle;
+  }
+
+  .text {
+    border-bottom: 2px solid #F2F2F2;
+    padding-bottom: 35px;
+  }
+}
+
+.zdcy {
+  margin-top: 42px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  color: #b09b99;
+  font-size: 11px;
+  font-weight: bold;
+  .item {
+    text-align: left;
+  }
+
+  img {
+    display: block;
+    margin-right: 15px;
   }
 }
 </style>
