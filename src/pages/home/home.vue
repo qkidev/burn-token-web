@@ -102,7 +102,8 @@
 
       <div class="my-box">
         <div class="text"><b>Burn Token</b> 的智能合约已通过<b>知道创宇审核</b></div>
-        <div class="text"><a class="link" href="javascript:;">点击查看审核安全报告</a></div>
+        <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmXbSeRoC5QoJgNCvyz4igZZyy1shYgcTmBqSnJCRUafSt">点击查看审核安全报告</a></div>
+        <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmeZgnaFybXxFp9SorHTNkoMFZ5zHSmb7BTSSss5Cftmab">Click to view the audit security report</a></div>
       </div>
 
       <div class="zdcy">
