@@ -1,4 +1,5 @@
 import { Toast } from 'vant';
+import {GLOBAL_CONFIGS} from '../utils/global';
 const h5Copy = {
   methods: {
     h5Copy(content) {
@@ -102,15 +103,12 @@ const initEth = {
   },
   async created() {
     if (typeof ethereum == "undefined") {
-      Toast('请安装metamask插件、或者使用qkpay打开')
+      Toast(GLOBAL_CONFIGS.openPluginToast)
     } else {
-      // const qkiUrk = 'https://hz.node.quarkblockchain.cn ';
-      // let customHttpProvider = new ethers.providers.JsonRpcProvider(qkiUrk);
       window.ethereum.enable();
       let customHttpProvider = new ethers.providers.Web3Provider(
         window.ethereum
       );
-
       if (window.ethereum.isMetaMask) {
         window.ethereum
           .request({
@@ -118,8 +116,8 @@ const initEth = {
           })
           .then((chainId) => {
             //可以把
-            if (chainId != "20181205")
-              Toast('请使用QKI主网,请切换到QKI主网')
+            if (chainId != GLOBAL_CONFIGS.chainId)
+              Toast(GLOBAL_CONFIGS.toggleToast)
             this.chainId = chainId;
           })
           .catch((error) => {
@@ -131,8 +129,8 @@ const initEth = {
         // Handle the new chain.
         // Correctly handling chain changes can be complicated.
         // We recommend reloading the page unless you have a very good reason not to.
-        if (chainId != "0x133f0d5") {
-          Toast('请使用qki主网')
+        if (chainId != GLOBAL_CONFIGS.chainIdHex) {
+          Toast(GLOBAL_CONFIGS.useToast)
         }
         // setTimeout(function () {
         //   window.location.reload()
@@ -147,8 +145,8 @@ const initEth = {
     async isQKI() {
       let network = await this.provider.getNetwork();
       let networkVersion = network.chainId;
-      if (networkVersion != 20181205) {
-        Toast('你当前没有使用QKI主网，请切换主网为QKI');
+      if (networkVersion != GLOBAL_CONFIGS.chainId) {
+        Toast(GLOBAL_CONFIGS.toggleToast2);
         return false
       }
       return true;

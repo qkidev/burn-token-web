@@ -97,7 +97,7 @@
       </div>
 
       <div class="my-box qkswap">
-        <div class="text"> <img src="../../assets/qks.png" alt=""> 推荐使用qkswap交换bt和其它通证，避免被骗。  qkswap可以点击进入 <a href="https://app.qkswap.io" class="link"><b>https://app.qkswap.io</b></a></div>
+        <div class="text"> <img src="../../assets/qks.png" alt="">{{config.tipsDesc}}<a :href="config.tipsUrl" class="link"><b>{{config.tipsUrl}}</b></a></div>
       </div>
 
       <div class="my-box">
@@ -227,6 +227,7 @@ import { h5Copy, initEth, timeUtils, vertify } from "@/utils/utils";
 import { ethers } from "ethers";
 import { abi, abiPro } from "./abi";
 import { Toast } from "vant";
+import {GLOBAL_CONFIGS} from '../../utils/global'
 // 收益率,为了防止机器刷，LV1级qki余额大于1时，才能够拿到0.2%，否则拿到0.1%
 const RATE = ["0.002", "0.005", "0.006", "0.007", "0.008"];
 export default {
@@ -259,14 +260,15 @@ export default {
       receiveAble: false, // 收益是否可以被领取
       amount: "", // 燃烧数量
       expectAmount: 0, // 预估收益
-      decimals: 2 //精度
+      decimals: 2, //精度
+      config: GLOBAL_CONFIGS
     };
   },
   async created() {
     this.contractAddress =
       process.env.NODE_ENV == "development"
         ? "0xD3e9448D573963344f8cF6E95E6b072dc5b701C3"
-        : "0x3FB708e854041673433e708feDb9a1b43905b6f7";
+        : GLOBAL_CONFIGS.contractAdress;
     await this.getAddress();
     let currAbi = process.env.NODE_ENV == "development" ? abi : abiPro;
     var contract = new ethers.Contract(
