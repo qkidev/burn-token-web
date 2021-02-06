@@ -10,7 +10,7 @@ const QKI_CONFIG = {
   contractAdress: '0x3FB708e854041673433e708feDb9a1b43905b6f7'
 }
 const HT_CONFIG = {
-  chainId: '20181205',
+  chainId: '20181206',
   chainIdHex: '0x133f0d5',
   tipsDesc: '推荐使用qkswap交换bt和其它通证，避免被骗。  qkswap可以点击进入2333',
   tipsUrl: 'https://heco.burnbt.io ',

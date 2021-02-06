@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div :class="['container', config.chainId === '20181205' ? '' : 'theme-heco']">
     <div class="head">
       <div class="my flex">
-        <img :src="require('../../assets/head.png')" class="huo" mode />
+        <img :src="require('../../assets/'+assetUrl+'head.png') " class="huo" mode />
         <div class="right">
           <div class="align-center">
             <div class="text">我的算力</div>
@@ -15,14 +15,14 @@
       <div class="money space-between">
         <div class="item">
           <div class="align-center">
-            <img src="../../assets/wdye.png" class="img" mode />
+            <img :src="require('../../assets/'+assetUrl+'wdye.png')" class="img" mode />
             <div class="text">我的余额</div>
           </div>
           <div class="num">{{ balance }}</div>
         </div>
         <div class="item">
           <div class="align-center">
-            <img src="../../assets/qwtx.png" class="img1" mode />
+            <img :src="require('../../assets/'+assetUrl+'qwtx.png')" class="img1" mode />
             <div class="text">全网通证</div>
           </div>
           <div class="num">{{ totalSupply }}</div>
@@ -39,19 +39,19 @@
     <div class="cont">
       <div class="tab space-between">
         <div class="item" @click="showBurnFlag = true">
-          <img src="../../assets/tab1.png" class="img" mode />
+          <img :src="require('../../assets/'+assetUrl+'tab1.png')" class="img" mode />
           <div class="text">燃烧原料</div>
         </div>
         <div class="item" @click="showIncome">
-          <img src="../../assets/tab2.png" class="img" mode />
+          <img :src="require('../../assets/'+assetUrl+'tab2.png')" class="img" mode />
           <div class="text">挖取矿产</div>
         </div>
         <div class="item" @click="lvShow = true">
-          <img src="../../assets/level.png" class="img" mode />
+          <img :src="require('../../assets/'+assetUrl+'level.png')" class="img" mode />
           <div class="text">等级说明</div>
         </div>
         <div class="item" @click="h5Copy(myAddress)">
-          <img src="../../assets/tab4.png" class="img" mode />
+          <img :src="require('../../assets/'+assetUrl+'tab4.png')" class="img" mode />
           <div class="text">邀请好友</div>
         </div>
       </div>
@@ -59,14 +59,14 @@
       <div class="my-box">
         <div class="top space-between">
           <div class="align-center">
-            <img src="../../assets/add.png" class="img" mode />
+            <img :src="require('../../assets/'+assetUrl+'add.png')" class="img" mode />
             <div class="text">我的地址</div>
           </div>
           <div class="text">共邀请 {{ inviteCount }} 人</div>
         </div>
         <div class="copy space-between">
           <div class="num ellipsis">{{ myAddress }}</div>
-          <img src="../../assets/copy1.png" class="copy-img" @click="h5Copy(myAddress)" mode />
+          <img :src="require('../../assets/'+assetUrl+'copy1.png')" class="copy-img" @click="h5Copy(myAddress)" mode />
         </div>
       </div>
       <div class="my-box">
@@ -97,11 +97,11 @@
       </div>
 
       <div class="my-box qkswap">
-        <div class="text"> <img src="../../assets/qks.png" alt="">{{config.tipsDesc}}<a :href="config.tipsUrl" class="link"><b>{{config.tipsUrl}}</b></a></div>
+        <div class="text2"> <img src="../../assets/qks.png" alt="">{{config.tipsDesc}}<a :href="config.tipsUrl" class="link"><b>{{config.tipsUrl}}</b></a></div>
       </div>
 
       <div class="my-box">
-        <div class="text"><b>Burn Token</b> 的智能合约已通过<b>知道创宇审核</b></div>
+        <div class="text2"><b>Burn Token</b> 的智能合约已通过<b>知道创宇审核</b></div>
         <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmXbSeRoC5QoJgNCvyz4igZZyy1shYgcTmBqSnJCRUafSt">点击查看审核安全报告</a></div>
         <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmeZgnaFybXxFp9SorHTNkoMFZ5zHSmb7BTSSss5Cftmab">Click to view the audit security report</a></div>
       </div>
@@ -118,7 +118,7 @@
       <div class="flex-box">
         <div class="box">
           <div class="align-center">
-            <img src="../../assets/wenhao.png" class="wenhao" mode />
+            <img :src="require('../../assets/'+assetUrl+'wenhao.png')" class="wenhao" mode />
             <div class="text">等级说明</div>
           </div>
           <div class="text1 alignLeft">
@@ -148,12 +148,12 @@
       <div class="flex-box">
         <div class="box1">
           <div class="align-center">
-            <img src="../../assets/rs.png" class="rs" mode />
+            <img :src="require('../../assets/'+assetUrl+'rs.png')" class="rs" mode />
             <div class="text">燃烧原料</div>
           </div>
           <div class="text1 alignLeft">
             可用余额
-            <span class="smallMainTxt">{{ balance }}</span>burn
+            <span>{{ balance }}</span>burn
           </div>
           <div class="input-box space-between">
             <input type="text" class="input" value placeholder="输入燃烧数量" v-model="amount" />
@@ -174,7 +174,7 @@
       <div class="flex-box">
         <div class="box1">
           <div class="align-center">
-            <img src="../../assets/wq.png" class="wq" mode />
+            <img :src="require('../../assets/'+assetUrl+'wq.png')" class="wq" mode />
             <div class="text">挖取矿产</div>
           </div>
           <div class="text5">
@@ -192,7 +192,7 @@
       <div class="flex-box">
         <div class="box1">
           <div class="align-center">
-            <img src="../../assets/lqjl.png" class="lq" mode />
+            <img :src="require('../../assets/'+assetUrl+'lqjl.png')" class="lq" mode />
             <div class="text">领取收益</div>
           </div>
           <div class="text5" v-if="receiveAble">
@@ -261,7 +261,8 @@ export default {
       amount: "", // 燃烧数量
       expectAmount: 0, // 预估收益
       decimals: 2, //精度
-      config: GLOBAL_CONFIGS
+      config: GLOBAL_CONFIGS,
+      assetUrl: process.env.VUE_APP_PLATFORM == 'QKI' ? '' : 'heco/'
     };
   },
   async created() {
@@ -784,7 +785,7 @@ export default {
       height: 30px;
     }
 
-    .text {
+    .text, .text2 {
       font-size: 24px;
       color: #b09b99;
       margin-left: 14px;
@@ -989,7 +990,7 @@ export default {
         font-size: 24px;
         color: #b9b9b9;
         margin-top: 80px;
-        uni-text {
+        span {
           font-size: 50px;
           color: #dc5242;
           font-weight: 500;
@@ -1075,5 +1076,90 @@ export default {
     display: block;
     margin-right: 15px;
   }
+}
+.theme-heco{
+  .head {
+    background: url(../../assets/heco/bj.png) no-repeat;
+    .my {
+      .right {
+        .align-center {
+          .text {
+            color: #fff;
+          }
+        }
+      }
+    }
+    .money {
+      .item {
+        .text {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .cont{
+    .my-box {
+      .text {
+        color:#001D52;
+      }
+      .text1 {
+        font-size: 24px;
+        color: #7d7d82;
+      }
+      .text2 {
+        color: #b09b99;
+      }
+      .copy {
+        background: #DFE7FF;
+        &.copy1 {
+          height: 102px;
+          background: #f3f3f3;
+          padding: 0 33px 0 40px;
+        }
+
+        .flex-box {
+          background: #536689;
+        }
+
+        .num {
+          color: #001D52;
+        }
+      }
+    }
+  }
+  .bg {
+    .flex-box {
+      .box {
+        .text1 {
+          .lv {
+            color: #1C6DF1;
+          }
+        }
+        .btn {
+          background: #1C6DF1;
+        }
+      }
+      .box1 {
+        .text1 {
+          span {
+            color:#6F81A8;
+          }
+        }
+        .text3 {
+          color: #092559;
+        }
+        .tit {
+          color: #001D52;
+        }
+        .btn {
+          background: #1C6DF1;
+        }
+      }
+    }
+  }
+  .hy {
+    background: linear-gradient(135deg, #005AFF 0%, #337CE4 100%);
+  }
+  
 }
 </style>
