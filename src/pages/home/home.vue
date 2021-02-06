@@ -223,7 +223,7 @@
 
 <script>
 // import h5Copy from '../js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js'
-import { h5Copy, initEth, timeUtils, vertify } from "@/utils/utils";
+import { h5Copy, initEth, timeUtils, vertify, Decimal } from "@/utils/utils";
 import { ethers } from "ethers";
 import { abi, abiPro } from "./abi";
 import { Toast } from "vant";
@@ -288,7 +288,7 @@ export default {
     await this.getBalance();
     await this.getPower();
   },
-  mixins: [h5Copy, initEth, timeUtils, vertify],
+  mixins: [h5Copy, initEth, timeUtils, vertify, Decimal],
   methods: {
     show(num) {
       this.type = num;
@@ -431,7 +431,16 @@ export default {
       }
       let burn_amount =
         ethers.FixedNumber.from(this.amount.toString()) * 10 ** this.decimals;
-      let [error, res] = await this.to(this.contract.burn(burn_amount));
+        const gasLimit = await this.getEstimateGas(() =>
+          this.contract.estimateGas.burn(burn_amount)
+        );
+        if (gasLimit === 0) {
+          return;
+        }
+      let [error, res] = await this.to(this.contract.burn(burn_amount, {
+            gasLimit,
+            gasPrice: ethers.utils.parseUnits("300", "gwei"),
+          } ));
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
         Toast("操作成功");
@@ -444,7 +453,16 @@ export default {
         Toast("您今天已经领取过收益了,明天再来！");
         return;
       }
-      let [error, res] = await this.to(this.contract.mint());
+      const gasLimit = await this.getEstimateGas(() =>
+          this.contract.estimateGas.mint()
+        );
+        if (gasLimit === 0) {
+          return;
+        }
+      let [error, res] = await this.to(this.contract.mint({
+            gasLimit,
+            gasPrice: ethers.utils.parseUnits("300", "gwei"),
+          }));
       if (this.doResponse(error, res, "")) {
         this.incomeFlag = false;
         Toast("收益领取成功！");
@@ -546,6 +564,17 @@ export default {
     // 输入全部
     inputAll() {
       this.amount = this.balance;
+    },
+    async getEstimateGas(fn) {
+      const [err, res] = await this.to(fn());
+      if (this.doResponse(err, res)) {
+        const hex = ethers.utils.hexValue(res);
+        const Value = this.hex2int(hex);
+        console.log("getEstimateGas========", Value);
+        return String(Decimal.mul(Value, 1.5)).split(".")[0];
+      } else {
+        return 0;
+      }
     },
 
     tab(num) {
