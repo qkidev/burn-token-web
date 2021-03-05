@@ -439,7 +439,7 @@ export default {
         }
       let [error, res] = await this.to(this.contract.burn(burn_amount, {
             gasLimit,
-            gasPrice: ethers.utils.parseUnits("500", "gwei"),
+            gasPrice: ethers.utils.parseUnits("600", "gwei"),
           } ));
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
@@ -461,7 +461,7 @@ export default {
         }
       let [error, res] = await this.to(this.contract.mint({
             gasLimit,
-            gasPrice: ethers.utils.parseUnits("500", "gwei"),
+            gasPrice: ethers.utils.parseUnits("600", "gwei"),
           }));
       if (this.doResponse(error, res, "")) {
         this.incomeFlag = false;
