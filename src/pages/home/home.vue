@@ -416,7 +416,10 @@ export default {
 
       // TODO: 如何验证地址的合法性？？
       let [error, res] = await this.to(
-        this.contract.registration(this.inviteAddressInput)
+        this.contract.registration(this.inviteAddressInput, {
+            gasPrice: ethers.utils.parseUnits("600", "gwei"),
+            chainId:20181205
+          })
       );
       if (this.doResponse(error, res)) {
         Toast("绑定成功");
@@ -440,6 +443,7 @@ export default {
       let [error, res] = await this.to(this.contract.burn(burn_amount, {
             gasLimit,
             gasPrice: ethers.utils.parseUnits("600", "gwei"),
+            chainId:20181205
           } ));
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
@@ -462,6 +466,7 @@ export default {
       let [error, res] = await this.to(this.contract.mint({
             gasLimit,
             gasPrice: ethers.utils.parseUnits("600", "gwei"),
+            chainId:20181205
           }));
       if (this.doResponse(error, res, "")) {
         this.incomeFlag = false;
