@@ -268,7 +268,7 @@ export default {
   async created() {
     this.contractAddress =
       process.env.NODE_ENV == "development"
-        ? "0xD3e9448D573963344f8cF6E95E6b072dc5b701C3"
+        ? "0x3FB708e854041673433e708feDb9a1b43905b6f7"
         : GLOBAL_CONFIGS.contractAdress;
     await this.getAddress();
     let currAbi = process.env.NODE_ENV == "development" ? abi : abiPro;
@@ -417,8 +417,7 @@ export default {
       // TODO: 如何验证地址的合法性？？
       let [error, res] = await this.to(
         this.contract.registration(this.inviteAddressInput, {
-            gasPrice: ethers.utils.parseUnits("600", "gwei"),
-            chainId:20181205
+            gasPrice: ethers.utils.parseUnits("600", "gwei")
           })
       );
       if (this.doResponse(error, res)) {
@@ -442,8 +441,7 @@ export default {
         }
       let [error, res] = await this.to(this.contract.burn(burn_amount, {
             gasLimit,
-            gasPrice: ethers.utils.parseUnits("600", "gwei"),
-            chainId:20181205
+            gasPrice: ethers.utils.parseUnits("600", "gwei")
           } ));
       if (this.doResponse(error, res)) {
         this.showBurnFlag = false;
@@ -465,8 +463,7 @@ export default {
         }
       let [error, res] = await this.to(this.contract.mint({
             gasLimit,
-            gasPrice: ethers.utils.parseUnits("600", "gwei"),
-            chainId:20181205
+            gasPrice: ethers.utils.parseUnits("600", "gwei")
           }));
       if (this.doResponse(error, res, "")) {
         this.incomeFlag = false;
