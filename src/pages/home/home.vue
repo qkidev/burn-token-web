@@ -106,6 +106,19 @@
         <div class="text"><a class="link" href="https://qkfilecdn.io/ipfs/QmeZgnaFybXxFp9SorHTNkoMFZ5zHSmb7BTSSss5Cftmab">Click to view the audit security report</a></div>
       </div>
 
+      <div class="my-box tele-box">
+        <div class="copy copy1 space-between">
+          <div class="flex1 flex_h">
+            <img :src="require('../../assets/telegram.png')" alt="" />
+            <div class="flex_v_start">
+              <div class="black30">Telegram</div>
+              <div class="grey30">HBT官方中文群</div>
+            </div>
+          </div>
+          <div class="tele_btn" @click="joinTele">立即加入</div>
+        </div>
+      </div>
+
       <div class="zdcy">
         <div class="item"><img width="30px" src="../../assets/zdcy.png" mode /></div>
         <div class="item">
@@ -578,7 +591,12 @@ export default {
         return 0;
       }
     },
-
+    joinTele() {
+      this.h5Copy("https://t.me/qkiburntoken");
+      setTimeout(() => {
+        window.location.href = "https://t.me/qkiburntoken";
+      }, 1000);
+    },
     tab(num) {
       this.active = num;
     }
@@ -858,6 +876,28 @@ export default {
       .copy-img {
         width: 34px;
         height: 34px;
+      }
+    }
+    &.tele-box {
+      img {
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+      }
+      .black30 {
+        color: #333;
+        font-size: 28px;
+      }
+      .grey30 {
+        color: #737278;
+        font-size: 28px;
+      }
+      .tele_btn {
+        background-color: rgb(42, 161, 213);
+        color: #fff;
+        font-size: 30px;
+        border-radius: 10px;
+        padding: 15px 30px;
       }
     }
   }
