@@ -119,6 +119,19 @@
         </div>
       </div>
 
+      <div class="my-box tele-box">
+        <div class="copy copy1 space-between">
+          <div class="flex1 flex_h">
+            <img :src="require('../../assets/QQ.png')" alt="" />
+            <div class="flex_v_start">
+              <div class="black30">575179088</div>
+              <div class="grey30">BT社区群</div>
+            </div>
+          </div>
+          <div class="tele_btn" @click="joinQQ">立即加入</div>
+        </div>
+      </div>
+
       <div class="zdcy">
         <div class="item"><img width="30px" src="../../assets/zdcy.png" mode /></div>
         <div class="item">
@@ -595,6 +608,12 @@ export default {
       this.h5Copy("https://t.me/qkiburntoken");
       setTimeout(() => {
         window.location.href = "https://t.me/qkiburntoken";
+      }, 1000);
+    },
+    joinQQ() {
+      this.h5Copy("575179088");
+      setTimeout(() => {
+      window.location.href = "tencent://message/?uin=10987654321";
       }, 1000);
     },
     tab(num) {
