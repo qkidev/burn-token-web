@@ -592,9 +592,9 @@ export default {
       }
     },
     joinTele() {
-      this.h5Copy("https://t.me/joinchat/VWVvABpAXhk_pMtzCIgv5A");
+      this.h5Copy("https://t.me/qkiburntoken");
       setTimeout(() => {
-        window.location.href = "https://t.me/joinchat/VWVvABpAXhk_pMtzCIgv5A";
+        window.location.href = "https://t.me/qkiburntoken";
       }, 1000);
     },
     tab(num) {
