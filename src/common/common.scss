@@ -54,6 +54,12 @@ $main_color-inverse: #ffcdcd;
 	flex-direction: column;
 	align-items: center;
 }
+.flex_v_start{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
 .flex_v_end{
 	display: flex;
 	flex-direction: column;
