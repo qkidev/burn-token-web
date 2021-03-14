@@ -72,7 +72,6 @@ contract burn_token_v2 is SafeMath{
 
     /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
-    mapping (address => uint256) public CoinBalanceOf;
     //      user             token        balance
     mapping (address => mapping(address => uint256)) public TokenBalanceOf;
     mapping (address => address) public invite;//邀请
