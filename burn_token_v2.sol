@@ -197,7 +197,7 @@ contract burn_token_v2 is SafeMath{
         {
             scale = 4;   
         }
-        uint256 _fee = _value * scale / (100-scale);//例如手续费20%，账号减少1个，到账0.8个，0.2手续费
+        uint256 _fee = _value * scale / 100;
         return _fee;
     }
 
