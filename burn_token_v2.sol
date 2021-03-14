@@ -463,9 +463,9 @@ contract burn_token_v2 is SafeMath{
 
         uint miner_days=(block.timestamp - last_miner[msg.sender])/epoch;
         
-        if(miner_days > 7)
+        if(miner_days > 5)
         {
-            miner_days = 7;//单次最多领取7天的
+            miner_days = 5;//单次最多领取7天的
         }
         
         //第一次挖矿只能1天
@@ -474,7 +474,7 @@ contract burn_token_v2 is SafeMath{
             miner_days = 1;
         }
 
-        //v2及以上可以7天 v1只能每天领
+        //v2及以上可以5天 v1只能每天领
         if(miner_days > 1 && power[msg.sender] < 500 * 1e3)
         {
             miner_days = 1;
