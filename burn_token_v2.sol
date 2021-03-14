@@ -66,8 +66,6 @@ contract burn_token_v2 is SafeMath{
     bool public is_mint = true;//是否开启挖矿
     
     uint public anti_bot = 100e6;//如果v1用户usdt余额小于这个值，不能挖矿
-    uint public requireHQKI = 0;//需要的qki数量
-    address public HQKIToken = 0x835F6dF988B6f51c9477D49e96aDBbc644ba97a2;//hqki
     uint public min_gasprice = 1 gwei;//最低gas价格
     address public requireToken = 0xDF0e293CC3c7bA051763FF6b026DA0853D446E38;//usdt
 
@@ -378,7 +376,7 @@ contract burn_token_v2 is SafeMath{
             totalPower += hbt_power;
             totalUsersAmount++;
         }
-        uint256 hbt_invite  = burn_token(0x3FB708e854041673433e708feDb9a1b43905b6f7).invite (msg.sender);
+        uint256 hbt_invite  = burn_token(0x3FB708e854041673433e708feDb9a1b43905b6f7).invite(msg.sender);
         if(hbt_invite != address(0))
         {
             invite[msg.sender] = hbt_invite;//记录邀请人
@@ -386,25 +384,11 @@ contract burn_token_v2 is SafeMath{
         }
     }
     
-    //空投,用户自己可以申请领取算力
-    function airdrop() public{
-        if(tx.gasprice < min_gasprice) revert("min_gasprice");
-        require(power[msg.sender] == 0);//零算力账号才可以
-        require(is_airdrop);//需要开启空投
-        power[msg.sender] = 100 * 1e3;
-        totalPower += 100 *  1e3;
-        totalUsersAmount++;
-    }
+
     
     function setOwner(address payable new_owner) public {
         require(msg.sender == owner);
         owner = new_owner;
-    }
-    
-    function set_airdrop() public{
-        require(msg.sender == owner);
-        require(is_airdrop);
-        is_airdrop = !is_airdrop;
     }
     
     //暂停升级,升级只有一次机会
@@ -412,18 +396,6 @@ contract burn_token_v2 is SafeMath{
         require(msg.sender == owner);
         require(is_upgrade);
         is_upgrade = false;
-    }
-    
-    //设置hqki合约地址
-    function setHqki(address token) public {
-        require(msg.sender == owner);
-        HQKIToken = token;
-    }
-
-    //设置一个值，如果用户的hqki余额小于这个值，而且算力小于500，不能挖矿，限制刷子
-    function setRequireHqki(uint _value) public{
-        require(msg.sender == owner);
-        requireHQKI = _value;
     }
     
 
@@ -472,7 +444,6 @@ contract burn_token_v2 is SafeMath{
             scale = 20;
             //用户合约内锁仓token余额小于一个值，就不能挖矿
             require(TokenBalanceOf[msg.sender][requireToken] >= anti_bot,"token too low");
-            require(TokenBalanceOf[msg.sender][HQKIToken] >= requireHQKI,"hqki too low");
         }
         else if(power[msg.sender] < 5000* 1e3)
         {
