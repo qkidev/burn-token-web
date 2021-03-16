@@ -377,6 +377,18 @@
         </div>
       </div>
     </div>
+    <!-- 跳转v2弹框 -->
+    <div class="bg" v-show="showComfirm">
+      <div class="flex-box">
+        <div class="box1">
+          <div style="font-size: 14px; color: #333; text-align: left">
+            <span>尊敬的BT用户，社区发起的BT分叉版本BT已生效，基于自愿原则迁移至分叉版本BT合约，请您进入以下分叉版本BT界面操作迁移。</span>
+          </div>
+          <div class="flex-box btn" @click="gotoV2" style="margin-top: 40px;">进入BT分叉版</div>
+          <div class="text4" @click="showComfirm = false">取消</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -402,6 +414,7 @@ export default {
       level: 1,
       lvShow: false,
       bgShow: false,
+      showComfirm: true,
       type: 1,
       epoch: 86400, // 挖矿周期
       inviteCount: "0", // 邀请的人数
@@ -636,6 +649,10 @@ export default {
         Toast("收益领取成功！");
         await this.queryTransation(res.hash, true);
       }
+    },
+    /// 进入bt v2
+    gotoV2() {
+      window.location.href = 'https://app-v2.burnbt.io/';
     },
     // 查询Transaction
     async queryTransation(hash, updateTime) {
